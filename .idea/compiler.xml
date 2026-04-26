@@ -11,10 +11,16 @@
         <module name="employeeService" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="discoveryService" target="17" />
+      <module name="DiscoveryService" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="AddressService" options="-parameters" />
+      <module name="DiscoveryService" options="-parameters" />
+      <module name="discoveryService" options="-parameters" />
       <module name="employeeService" options="-parameters" />
     </option>
   </component>
