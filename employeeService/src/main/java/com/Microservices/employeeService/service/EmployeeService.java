@@ -17,7 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.reactive.function.client.WebClient;
+//import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 
@@ -40,8 +40,8 @@ public class EmployeeService {
         this.restTemplate=builder.rootUri(addressBaseURL).build();
     } */
 
-    @Autowired
-    private WebClient webClient;
+    //@Autowired
+    //private WebClient webClient;
 
     @Autowired
     private DiscoveryClient discoveryClient;
@@ -55,7 +55,7 @@ public class EmployeeService {
     {
         Employee emp =  employeeRepository.findById(id).get();
         EmployeeResponse employeeResponse = modelMapper.map(emp,EmployeeResponse.class);
-        ResponseEntity<AddressResponse> response =  callingAddressServiceUsingRestTemplate(id); //addressClient.getAddressByEmployeeId(id);
+        ResponseEntity<AddressResponse> response =  addressClient.getAddressByEmployeeId(id);//callingAddressServiceUsingRestTemplate(id);
         AddressResponse addressResponse = response.getBody();
         employeeResponse.setAddressResponse(addressResponse);
 
@@ -70,9 +70,10 @@ public class EmployeeService {
         return ResponseEntity.ok(employeeResponse);
     }
 
+    /* uncomment imports ,bean configuration  and injection and add web Flux dependency
     private ResponseEntity<AddressResponse>  callingAddressServiceUsingWebClient(int id){
         return webClient.get().uri("/address/"+id).retrieve().toEntity(AddressResponse.class).block();
-    }
+    } */
 
     private ResponseEntity<AddressResponse>  callingAddressServiceUsingRestTemplate(int id) {
         //List<ServiceInstance> instances = discoveryClient.getInstances("ADDRESSSERVICE");

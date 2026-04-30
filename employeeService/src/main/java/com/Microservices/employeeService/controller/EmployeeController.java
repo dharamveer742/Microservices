@@ -19,5 +19,4 @@ public class EmployeeController {
     public ResponseEntity<EmployeeResponse>  getEmployee(@PathVariable int id){
         return employeeService.getEmployee(id);
     }
-
 }

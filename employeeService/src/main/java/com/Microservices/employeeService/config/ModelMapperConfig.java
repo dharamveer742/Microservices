@@ -2,10 +2,11 @@ package com.Microservices.employeeService.config;
 
 import com.Microservices.employeeService.feignClient.AddressClient;
 import org.modelmapper.ModelMapper;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.reactive.function.client.WebClient;
+//import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
 public class ModelMapperConfig {
@@ -14,6 +15,7 @@ public class ModelMapperConfig {
         return new ModelMapper();
     }
 
+    /*
     @Bean
     public WebClient webClient() {
         return WebClient.builder()
@@ -21,7 +23,10 @@ public class ModelMapperConfig {
                 .build();
     }
 
+     */
+
     @Bean
+    @LoadBalanced
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
